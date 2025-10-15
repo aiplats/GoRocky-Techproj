@@ -13,7 +13,7 @@
 html,
 body {
   max-width: 100vw;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body {
@@ -24,11 +24,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.login-container {
+.auth-container {
   padding: 100px;
   width: 300px;
   border: 1px solid white;
   border-radius: 12px;
+  text-align: center;
 }
 
 input, button {
@@ -41,4 +42,28 @@ input, button {
 button {
   border: none;
   cursor: pointer;
+}
+
+.dashboard {
+  padding: 20px;
+}
+
+.navbar-list {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+
+.dashboard-lists {
+  display: flex;
+  padding: 50px;
+  gap: 50px;
+}
+
+.projects, .tasks {
+  width: 100%;
+}
+
+.project-lists, .task-lists {
+  padding: 30px;
 }

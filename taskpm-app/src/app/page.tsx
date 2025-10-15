@@ -1,16 +1,22 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Dashboard } from "@/app/Dashboard";
-import Login from "./Login/Login";
+'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Login />
-        
-      </main>
-      
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        router.push('/login');
+      } else {
+        router.push('/dashboard');
+      }
+    };
+    checkSession();
+  }, [router]);
+
+  return <p>Redirecting...</p>;
 }

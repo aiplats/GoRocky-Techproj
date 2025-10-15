@@ -1,17 +1,18 @@
 import React from 'react'
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="login-container">
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
         <form>
+            <input type="text" placeholder='Enter Full Name'/>
             <input type="email" placeholder='Enter Email'/>
             <input type="password" placeholder='Enter Password'/>
-            <button>Login</button>
+            <button>Sign Up</button>
         </form>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        <p>Already have an account? <a href="/login">Login</a></p>
     </div>
   )
 }
 
-export default Login
+export default Signup
