@@ -8,6 +8,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<any>(null);
   const [tasks, setTasks] = useState<any[]>([]);
+  const [projects, setProjects] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>(null);
   const router = useRouter();
 
@@ -22,11 +23,10 @@ export default function DashboardPage() {
       }
       setLoading(false);
     };
-
     getSession();
   }, [router]);
 
-  // ✅ Fetch user's profile
+  // ✅ Fetch user profile
   const fetchUserProfile = async (userId: string) => {
     const { data, error } = await supabase
       .from('profiles')
@@ -38,7 +38,23 @@ export default function DashboardPage() {
     else setProfile(data);
   };
 
-  // ✅ Fetch user's tasks
+  // ✅ Fetch user projects
+  const fetchUserProjects = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('id, title, description, created_at')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
+  };
+
+  // ✅ Fetch tasks linked to user's projects
   const fetchUserTasks = async (userId: string) => {
     try {
       const { data: projects, error: projectError } = await supabase
@@ -68,10 +84,11 @@ export default function DashboardPage() {
     }
   };
 
-  // ✅ Run once session is ready
+  // ✅ Run when session is ready
   useEffect(() => {
     if (session?.user) {
       fetchUserProfile(session.user.id);
+      fetchUserProjects(session.user.id);
       fetchUserTasks(session.user.id);
     }
   }, [session]);
@@ -82,9 +99,10 @@ export default function DashboardPage() {
     <div className="dashboard">
       <Navbar />
       <div className="dashboard-subcontainer">
-        <h1>Welcome to Dashboard, {profile?.full_name || 'User'}</h1>
+        <h1>Welcome to Dashboard, {profile?.full_name || 'User'}!</h1>
 
         <div className="dashboard-lists">
+          {/* PROJECTS SECTION */}
           <div className="projects">
             <h2>My Projects</h2>
             <button>Manage</button>
@@ -93,7 +111,10 @@ export default function DashboardPage() {
                 projects.map((proj) => (
                   <li key={proj.id}>
                     <strong>{proj.title}</strong>
+                    <br />
                     <small>{proj.description}</small>
+                    <br />
+                    <small>Created: {new Date(proj.created_at).toLocaleDateString()}</small>
                     <br />
                     <br />
                   </li>
@@ -104,6 +125,7 @@ export default function DashboardPage() {
             </ul>
           </div>
 
+          {/* TASKS SECTION */}
           <div className="tasks">
             <h2>Recent Tasks</h2>
             <button>View All</button>
@@ -112,11 +134,12 @@ export default function DashboardPage() {
               {tasks.length > 0 ? (
                 tasks.map((task) => (
                   <li key={task.id}>
-                    <strong>{task.title}</strong> — {task.status || 'No status'} <br />
+                    <strong>{task.title}</strong> — {task.status || 'No status'}
+                    <br />
                     <small>Due: {task.due_date || 'No due date'}</small>
                     <br />
                     <br />
-                  </li>                  
+                  </li>
                 ))
               ) : (
                 <p>No tasks found.</p>
