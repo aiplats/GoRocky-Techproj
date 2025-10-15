@@ -41,6 +41,9 @@ export default function LoginPage() {
 
   return (
     <div className="auth-container login">
+      <h1>GoRocky</h1>
+      <p>Manage your projects and track progress</p>
+      <br />
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       <form onSubmit={handleSubmit}>
         {!isLogin && (

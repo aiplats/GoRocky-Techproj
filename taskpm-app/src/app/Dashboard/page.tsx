@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/components/page';
+import Navbar from '@/app/Navbar/page';
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
@@ -96,16 +96,19 @@ export default function DashboardPage() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="dashboard">
+    <div className="main-container">
       <Navbar />
-      <div className="dashboard-subcontainer">
+      <div className="subcontainer">
         <h1>Welcome to Dashboard, {profile?.full_name || 'User'}!</h1>
 
         <div className="dashboard-lists">
           {/* PROJECTS SECTION */}
           <div className="projects">
-            <h2>My Projects</h2>
-            <button>Manage</button>
+            <div className="section-header">
+              <h2>My Projects</h2>
+              <button>Manage</button>
+            </div>
+
             <ul className="project-lists">
               {projects.length > 0 ? (
                 projects.map((proj) => (
@@ -127,8 +130,10 @@ export default function DashboardPage() {
 
           {/* TASKS SECTION */}
           <div className="tasks">
-            <h2>Recent Tasks</h2>
-            <button>View All</button>
+            <div className="section-header">
+              <h2>Recent Tasks</h2>
+              <button>View All</button>
+            </div>
 
             <ul className="task-lists">
               {tasks.length > 0 ? (
