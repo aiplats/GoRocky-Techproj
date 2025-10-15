@@ -38,6 +38,7 @@ export default function DashboardPage() {
 
             <div className="project-lists">
               <li>Projects go here</li>
+              <li>Projects go here</li>
             </div>
           </div>
           <div className="tasks">
@@ -45,6 +46,7 @@ export default function DashboardPage() {
             <button>View All</button>
 
             <div className="task-lists">
+              <li>Tasks go here</li>
               <li>Tasks go here</li>
             </div>
           </div>
