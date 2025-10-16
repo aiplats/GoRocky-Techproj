@@ -101,7 +101,7 @@ const Profile = () => {
           <h2>{profile?.full_name || 'User'}</h2>
 
           <div className="profile-projects">
-            <h1>Projects Given</h1>
+            <h2>Projects Given</h2>
             
             <Projects
               projects={projects}
@@ -111,7 +111,7 @@ const Profile = () => {
           </div>
 
           <div className="profile-task">
-            <h1>Tasks Given</h1>
+            <h2>Tasks Given</h2>
 
             <Tasks
               tasks={tasks}
