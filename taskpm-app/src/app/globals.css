@@ -131,3 +131,14 @@ button {
 .edit-form {
   width: 200px;
 }
+
+.project-details-container {
+  display: flex;
+}
+
+.project-actions {
+  display: flex;
+  gap: 10px;
+  padding: 20px 15px;
+  height: 50px;
+}

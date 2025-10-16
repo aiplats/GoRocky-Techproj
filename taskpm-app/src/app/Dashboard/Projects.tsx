@@ -159,12 +159,14 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
                   </div>
                 </div>
               ) : (
-                <div className="project-details">
-                  <strong>{project.title}</strong>
-                  <p>{project.description || 'No description provided'}</p>
-                  <small>
+                <div className="project-details-container">
+                  <div className="project-details">
+                    <strong>{project.title}</strong>
+                    <p>{project.description || 'No description provided'}</p>
+                    <small>
                     Created: {new Date(project.created_at).toLocaleDateString()}
                   </small>
+                  </div>
                   <div className="project-actions">
                     <button onClick={() => startEdit(project)}>Edit</button>
                     <button onClick={() => deleteProject(project.id)}>Delete</button>
