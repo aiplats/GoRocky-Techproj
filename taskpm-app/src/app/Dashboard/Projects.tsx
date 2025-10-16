@@ -21,7 +21,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
     description: '',
   });
 
-  // 🔹 Handle input change for new or edit project
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (editingProjectId) {
@@ -31,7 +30,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
     }
   };
 
-  // 🔹 Add new project
   const saveNewProject = async () => {
     try {
       if (!session?.user) return console.error('No user session.');
@@ -56,7 +54,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
     }
   };
 
-  // 🔹 Start editing
   const startEdit = (project: any) => {
     setEditingProjectId(project.id);
     setEditValues({
@@ -65,7 +62,6 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
     });
   };
 
-  // 🔹 Save edit
   const saveEdit = async (id: string) => {
     try {
       const { error } = await supabase
@@ -87,16 +83,18 @@ const Projects: React.FC<ProjectsProps> = ({ projects, refreshProjects, session 
     }
   };
 
-  // 🔹 Cancel edit
   const cancelEdit = () => {
     setEditingProjectId(null);
     setEditValues({ title: '', description: '' });
   };
 
-  // 🔹 Delete project
-  const deleteProject = async (id: string) => {
+  const deleteProject = async (projectId: string) => {
     try {
-      const { error } = await supabase.from('projects').delete().eq('id', id);
+      const { error } = await supabase
+        .from('projects')
+        .delete()
+        .eq('id', projectId);
+        
       if (error) throw error;
 
       console.log('✅ Project deleted');

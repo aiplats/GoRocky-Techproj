@@ -82,6 +82,7 @@ export default function DashboardPage() {
           <Projects
             projects={projects}
             refreshProjects={() => fetchUserProjects(session?.user?.id)}
+            session={session}
           />
           <Tasks
             tasks={tasks}
