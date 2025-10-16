@@ -10,9 +10,9 @@ export default function Home() {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (!data.session) {
-        router.push('/login');
+        router.push('/Login');
       } else {
-        router.push('/dashboard');
+        router.push('/Dashboard');
       }
     };
     checkSession();

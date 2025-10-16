@@ -113,3 +113,21 @@ button {
   padding: 20px;
   text-align: center;
 }
+
+.task-details {
+  padding: 10px;
+}
+
+.task-details-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-action {
+  display: flex;
+  gap: 20px;
+}
+
+.edit-form {
+  width: 200px;
+}
